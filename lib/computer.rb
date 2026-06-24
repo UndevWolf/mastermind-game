@@ -7,10 +7,10 @@ class Computer
 
   def compare(guess, code)
     result = [0, 0]
-    guess.each_with_index do |num, i|
+    code.each_with_index do |num, i|
       if guess[i] == code[i]
         result[0] += 1
-      elsif code.include?(num)
+      elsif guess.include?(num)
         result[1] += 1
       end
     end

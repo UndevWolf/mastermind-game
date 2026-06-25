@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require './lib/compare'
 class Player
+  include Compare
   attr_accessor :name, :guesses
 
   def initialize
@@ -10,12 +12,14 @@ class Player
   end
 
   def guess
-    guess = []
     @guesses += 1
     puts 'Enter your guess:'
-    4.times do
-      guess << gets.to_i
-    end
-    guess
+    guess = gets.chomp.slice(0, 4)
+    guess.split('').map(&:to_i)
+  end
+
+  def make_code
+    puts 'Enter your code: '
+    gets.chomp.slice(0, 4).split('').map(&:to_i)
   end
 end

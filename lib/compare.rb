@@ -4,13 +4,22 @@ module Compare
     g = guess.dup
     result = [0, 0]
     c.each_with_index do |_, i|
-      if c[i] == g[i]
-        c[i] = nil
-        g[i] = nil
-      end
+      next unless c[i] == g[i]
+
+      c[i] = nil
+      g[i] = nil
     end
-    c.compact.each { |n| result[1] += 1 if g.compact.include?(n) }
-    result[0] = 4 - c.compact.length
+
+    c.compact!
+    g.compact!
+    g.each do |n|
+      next unless c.include?(n)
+
+      result[1] += 1
+      c[c.index(n)] = nil
+      g[g.index(n)] = nil
+    end
+    result[0] = 4 - c.length
     result
   end
 end

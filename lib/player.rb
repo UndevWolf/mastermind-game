@@ -3,12 +3,14 @@
 require './lib/compare'
 class Player
   include Compare
-  attr_accessor :name, :guesses
+  attr_accessor :name, :guesses, :guess_list, :results
 
   def initialize
     puts 'Enter player name: '
     @name = gets.chomp
     @guesses = 0
+    @guess_list = []
+    @results = []
   end
 
   def guess

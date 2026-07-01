@@ -22,14 +22,21 @@ class Computer
       @guess
     elsif @results[@guesses - 1].sum.zero?
       @guess.map! { |n| n + 1 }
+    elsif @results[@guesses - 1].sum == 4
+      @guess = @guess.shuffle
     elsif @results[@guesses - 1].sum >= 1
       @guess = solve
     end
+
     @guesses += 1
     @guess
   end
 
   def solve
-    included_count = @results[@guesses - 1].sum
+    increase = 4 - @results[@guesses - 1].sum
+    (1..increase).each do |n|
+      @guess[-n] += 1
+    end
+    @guess
   end
 end
